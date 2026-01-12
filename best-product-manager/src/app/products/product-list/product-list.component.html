@@ -1,0 +1,191 @@
+<div class="products-container">
+  <h2>Danh sách sản phẩm</h2>
+
+  <div *ngIf="!authService.isLoggedIn">
+    <p>Vui lòng đăng nhập để xem danh sách sản phẩm.</p>
+  </div>
+
+  <div *ngIf="authService.isLoggedIn">
+    <!-- Khu vực tìm kiếm sản phẩm (tách biệt so với grid sản phẩm). -->
+    <table class="products-search-table">
+      <tr>
+        <td class="label-cell">
+          <label for="searchKeyword">Tên sản phẩm cần tìm</label>
+        </td>
+        <td class="input-cell">
+          <input
+            id="searchKeyword"
+            #searchInput
+            type="text"
+            [(ngModel)]="searchKeyword"
+            (keyup.enter)="onSearch()"
+            class="text-input"
+          />
+        </td>
+        <td class="button-cell">
+          <button
+            type="button"
+            class="primary-button"
+            (click)="onSearch()"
+          >
+            Tìm
+          </button>
+        </td>
+        <td class="button-cell">
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="onShowAll()"
+          >
+            Hiển thị tất cả
+          </button>
+        </td>
+        <td class="button-cell">
+          <button
+            type="button"
+            class="primary-button"
+            (click)="onStartCreate()"
+          >
+            Đăng ký sản phẩm
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Thông báo liên quan đến thao tác tìm kiếm (cảnh báo / không tìm thấy). -->
+    <p *ngIf="searchMessage" class="error-text">{{ searchMessage }}</p>
+
+    <!-- Thông báo lỗi khi tải dữ liệu từ API. -->
+    <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+    <!-- Layout Cập nhật / Đăng ký sản phẩm (hiển thị phía trên grid). -->
+    <div
+      *ngIf="selectedProductId !== null || isCreateMode"
+      class="product-edit-container"
+    >
+      <h3 *ngIf="!isCreateMode">Cập nhật sản phẩm</h3>
+      <h3 *ngIf="isCreateMode">Đăng ký sản phẩm</h3>
+
+      <table class="products-search-table">
+        <tr *ngIf="!isCreateMode">
+          <td class="label-cell">
+            <label for="editProductId">Id sản phẩm</label>
+          </td>
+          <td class="input-cell">
+            <input
+              id="editProductId"
+              type="text"
+              [value]="selectedProductId"
+              class="text-input"
+              disabled
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="editProductName">Tên sản phẩm</label>
+          </td>
+          <td class="input-cell">
+            <input
+              id="editProductName"
+              type="text"
+              [(ngModel)]="editProductName"
+              class="text-input"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="editPrice">Đơn giá</label>
+          </td>
+          <td class="input-cell">
+            <input
+              id="editPrice"
+              type="number"
+              [(ngModel)]="editPrice"
+              class="text-input"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="label-cell">
+            <label for="editStock">Lưu kho</label>
+          </td>
+          <td class="input-cell">
+            <input
+              id="editStock"
+              type="number"
+              [(ngModel)]="editStock"
+              class="text-input"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <p *ngIf="updateErrorMessage" class="error-text">
+              {{ updateErrorMessage }}
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td class="button-cell">
+            <button
+              *ngIf="!isCreateMode"
+              type="button"
+              class="primary-button"
+              (click)="onUpdateProduct()"
+            >
+              Cập nhật
+            </button>
+            <button
+              *ngIf="isCreateMode"
+              type="button"
+              class="primary-button"
+              (click)="onCreateProduct()"
+            >
+              Đăng ký
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Grid danh sách sản phẩm -->
+    <table class="products-table" *ngIf="!errorMessage">
+      <thead>
+        <tr>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Số lượng tồn kho</th>
+          <th>Cập nhật</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.productName }}</td>
+          <td>{{ p.price | number:'1.2-2' }}</td>
+          <td>{{ p.stock }}</td>
+          <td>
+            <a
+              href="javascript:void(0)"
+              (click)="onSelectProduct(p)"
+            >
+              Cập nhật
+            </a>
+          </td>
+          <td>
+            <a
+              href="javascript:void(0)"
+              (click)="onDelete(p)"
+            >
+              Delete
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+.vs/
+bin/
+obj/
+BestProductManager.csproj.user
+FolderProfile.pubxml.user

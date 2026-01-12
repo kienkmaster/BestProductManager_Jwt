@@ -1,0 +1,20 @@
+## BestProductManager_Jwt
+
+# GoodSync
+/_gsdata_
+
+# Config
+.vs/
+
+# User Setting
+*.user
+
+# Favourites
+*.favdoc
+
+# Build
+.obj/
+.bin/
+bin/
+obj/
+*.Cache

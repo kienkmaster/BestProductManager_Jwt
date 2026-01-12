@@ -1,0 +1,71 @@
+<div class="home-container">
+  <section *ngIf="!isLoggedIn; else loggedInBlock">
+    <h2>Đăng nhập</h2>
+
+    <table class="login-table">
+      <tr>
+        <td class="label-cell">
+          <label for="userName">Tên đăng nhập:</label>
+        </td>
+        <td class="input-cell">
+          <input
+            id="userName"
+            type="text"
+            [(ngModel)]="userName"
+            class="text-input"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td class="label-cell">
+          <label for="password">Mật khẩu:</label>
+        </td>
+        <td class="input-cell">
+          <input
+            id="password"
+            type="password"
+            [(ngModel)]="password"
+            class="text-input"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td class="buttons-cell">
+          <button
+            type="button"
+            class="primary-button"
+            (click)="onLogin()"
+          >
+            Đăng nhập
+          </button>
+
+          <button
+            type="button"
+            class="secondary-button"
+            (click)="onGoToRegister()"
+          >
+            Đăng ký
+          </button>
+        </td>
+      </tr>
+
+      <tr *ngIf="loginError">
+        <td></td>
+        <td>
+          <p class="error-text">{{ loginError }}</p>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <ng-template #loggedInBlock>
+    <h2>Chào mừng, {{ currentUser }}!</h2>
+    <p>
+      Bạn đã đăng nhập thành công. 
+      <br>Bạn có thể truy cập các menu chức năng trên thanh điều hướng.
+    </p>
+  </ng-template>
+</div>

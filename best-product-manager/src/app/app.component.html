@@ -1,0 +1,82 @@
+<div class="app-container">
+  <header class="header">
+    <h1 class="app-title">{{ title }}</h1>
+  </header>
+
+  <nav class="nav-bar">
+    <div class="nav-left">
+      <a
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Trang chủ
+      </a>
+
+      <a
+        *ngIf="authService.isLoggedIn"
+        routerLink="/products"
+        routerLinkActive="active-link"
+      >
+        Quản lý sản phẩm
+      </a>
+
+      <a
+        routerLink="/contact"
+        routerLinkActive="active-link"
+      >
+        Liên hệ
+      </a>
+    </div>
+
+    <div class="nav-right">
+      <!-- Khi chưa đăng nhập hiển thị Đăng ký + Đăng nhập -->
+      <a
+        *ngIf="!authService.isLoggedIn"
+        routerLink="/register"
+        routerLinkActive="active-link"
+      >
+        Đăng ký
+      </a>
+
+      <a
+        *ngIf="!authService.isLoggedIn"
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Đăng nhập
+      </a>
+
+      <!-- Khi đã đăng nhập hiển thị menu Quản lý thành viên (chỉ Admin) + Đổi mật khẩu + Đăng xuất -->
+      <a
+        *ngIf="authService.isLoggedIn && authService.isAdmin"
+        routerLink="/admin/members"
+        routerLinkActive="active-link"
+      >
+        Quản lý thành viên
+      </a>
+
+      <a
+        *ngIf="authService.isLoggedIn"
+        routerLink="/change-password"
+        routerLinkActive="active-link"
+      >
+        Đổi mật khẩu
+      </a>
+
+      <button
+        *ngIf="authService.isLoggedIn"
+        type="button"
+        class="logout-button"
+        (click)="onLogout()"
+      >
+        Đăng xuất
+      </button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,53 @@
+<div class="member-management-container">
+  <h2>Quản lý thành viên</h2>
+
+  <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+  <table *ngIf="!errorMessage" class="members-table">
+    <thead>
+      <tr>
+        <th rowspan="2">Tên thành viên</th>
+        <th colspan="3">Phân loại thành viên</th>
+        <th rowspan="2">Mật khẩu</th>
+        <th rowspan="2">Phân loại</th>
+      </tr>
+      <tr>
+        <th>Thông thường</th>
+        <th>Đối tác</th>
+        <th>Quản lý</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let m of members">
+        <td>{{ m.userName }}</td>
+        <td class="center-cell">
+          <span *ngIf="isMemberNormal(m)">◉</span>
+        </td>
+        <td class="center-cell">
+          <span *ngIf="isMemberPartner(m)">◉</span>
+        </td>
+        <td class="center-cell">
+          <span *ngIf="isMemberAdmin(m)">◉</span>
+        </td>
+        <td>
+          <a
+            *ngIf="!isMemberAdmin(m)"
+            [routerLink]="['/admin/change-password', m.id]"
+            [queryParams]="{ userName: m.userName }"
+          >
+            Thay đổi
+          </a>
+        </td>
+        <td>
+          <a
+            *ngIf="!isMemberAdmin(m)"
+            [routerLink]="['/admin/change-role', m.id]"
+            [queryParams]="{ userName: m.userName }"
+          >
+            Thay đổi
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

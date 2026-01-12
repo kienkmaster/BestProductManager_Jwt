@@ -1,0 +1,13 @@
+<div class="contact-container">
+  <h2>Liên hệ</h2>
+
+  <ng-container *ngIf="isLoggedIn; else notLoggedInBlock">
+    <p>
+      Thông tin liên hệ: {{ currentUserName }}
+    </p>
+  </ng-container>
+
+  <ng-template #notLoggedInBlock>
+    <p>Vui lòng đăng nhập để xem thông tin liên hệ.</p>
+  </ng-template>
+</div>

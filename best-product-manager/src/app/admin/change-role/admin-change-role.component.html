@@ -1,0 +1,60 @@
+<div class="admin-change-role-container">
+    <h2>Thay đổi phân loại thành viên</h2>
+  
+    <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+  
+    <table *ngIf="!errorMessage" class="change-role-table">
+      <tr>
+        <td class="label-cell">
+          <label for="userName">Tên thành viên:</label>
+        </td>
+        <td class="input-cell">
+          <input
+            id="userName"
+            type="text"
+            class="text-input"
+            [value]="targetUserName"
+            disabled
+          />
+        </td>
+      </tr>
+  
+      <tr>
+        <td class="label-cell">
+          <label for="roleSelect">Phân loại:</label>
+        </td>
+        <td class="input-cell">
+          <select
+            id="roleSelect"
+            class="select-input"
+            [(ngModel)]="selectedRoleId"
+          >
+            <option *ngFor="let r of roles" [value]="r.id">
+              {{ r.name }}
+            </option>
+          </select>
+        </td>
+      </tr>
+  
+      <tr>
+        <td></td>
+        <td class="button-cell">
+          <button
+            type="button"
+            class="primary-button"
+            (click)="onApply()"
+          >
+            Cập nhật
+          </button>
+        </td>
+      </tr>
+  
+      <tr *ngIf="successMessage">
+        <td></td>
+        <td>
+          <p class="success-text">{{ successMessage }}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  

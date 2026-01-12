@@ -1,0 +1,29 @@
+.member-management-container {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  
+  .members-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  
+  .members-table th,
+  .members-table td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+  }
+  
+  .members-table thead {
+    background-color: #f5f5f5;
+  }
+  
+  .center-cell {
+    text-align: center;
+  }
+  
+  .error-text {
+    color: #b80000;
+  }
+  
