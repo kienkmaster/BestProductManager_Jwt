@@ -1,0 +1,50 @@
+<mat-card class="user-auth-card">
+  <h2 class="user-auth-title">Đăng nhập</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="user-auth-grid">
+      <div class="user-auth-label">Tên đăng nhập</div>
+      <div class="user-auth-input">
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput type="text" formControlName="userName" placeholder="Tên đăng nhập" />
+          <mat-error *ngIf="form.controls.userName.touched && form.controls.userName.invalid">
+            {{ getUserNameErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="user-auth-label">Mật khẩu</div>
+      <div class="user-auth-input">
+        <mat-form-field appearance="outline" class="full-width">
+          <input matInput type="password" formControlName="password" placeholder="Mật khẩu" />
+          <mat-error *ngIf="form.controls.password.touched && form.controls.password.invalid">
+            {{ getPasswordErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="user-auth-actions">
+        <button
+          mat-raised-button
+          type="submit"
+          class="beige-button"
+          [disabled]="(isSubmitting$ | async) === true"
+        >
+          Đăng nhập
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <div class="spinner-row" *ngIf="(isSubmitting$ | async) === true">
+    <app-spinner></app-spinner>
+  </div>
+
+  <div
+    class="status"
+    [class.status--error]="(isErrorStatus$ | async) === true"
+    *ngIf="(statusMessage$ | async) as msg"
+  >
+    {{ msg }}
+  </div>
+</mat-card>

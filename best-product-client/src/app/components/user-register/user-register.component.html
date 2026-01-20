@@ -1,0 +1,66 @@
+<!-- Spinner hiển thị trong thời gian gọi API đăng ký -->
+<app-spinner *ngIf="(isSubmitting$ | async) === true"></app-spinner>
+
+<!-- Khung register (register panel) theo Material Card -->
+<mat-card class="register-card">
+  <!-- Form reactive (Reactive Forms) gắn formGroup và xử lý submit -->
+  <form class="register-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <!-- Grid bố cục 2 cột theo yêu cầu layout business -->
+  <div class="register-grid">
+    <!-- Tiêu đề form -->
+    <div class="grid-title">
+    <h2 class="register-title">Đăng ký tài khoản</h2>
+    </div>
+
+    <!-- Row: userName -->
+    <div class="grid-label">Tên người dùng</div>
+    <div class="grid-input">
+    <!-- Form-field bọc input để hiển thị UI theo Material -->
+    <mat-form-field appearance="outline" class="full-width">
+      <!-- Input bind formControlName để Angular quản lý state/validation -->
+      <input matInput type="text" formControlName="userName" placeholder="Tên người dùng" />
+    </mat-form-field>
+
+    <!-- Khu vực hiển thị lỗi theo rule: message phụ thuộc touched + validator -->
+    <div class="field-error">{{ getUserNameErrorMessage() }}</div>
+    </div>
+
+    <!-- Row: password -->
+    <div class="grid-label">Mật khẩu</div>
+    <div class="grid-input">
+    <mat-form-field appearance="outline" class="full-width">
+      <input matInput type="password" formControlName="password" placeholder="Mật khẩu" />
+    </mat-form-field>
+
+    <div class="field-error">{{ getPasswordErrorMessage() }}</div>
+    </div>
+
+    <!-- Row: confirmPassword -->
+    <div class="grid-label">Xác nhận mật khẩu</div>
+    <div class="grid-input">
+    <mat-form-field appearance="outline" class="full-width">
+      <input matInput type="password" formControlName="confirmPassword" placeholder="Xác nhận mật khẩu" />
+    </mat-form-field>
+
+    <div class="field-error">{{ getConfirmPasswordErrorMessage() }}</div>
+    </div>
+
+    <!-- Row: action button -->
+    <div class="grid-actions">
+    <!-- Button submit dùng mat-button; khóa submit khi đang gọi API -->
+    <button mat-button type="submit" class="submit-button" [disabled]="(isSubmitting$ | async) === true">
+      Đăng ký
+    </button>
+    </div>
+  </div>
+
+  <!-- Status hiển thị kết quả gọi backend hoặc validation tổng -->
+  <div
+    class="status"
+    [class.status--error]="(isErrorStatus$ | async) === true"
+    [class.status--success]="(isErrorStatus$ | async) === false"
+  >
+    {{ statusMessage$ | async }}
+  </div>
+  </form>
+</mat-card>

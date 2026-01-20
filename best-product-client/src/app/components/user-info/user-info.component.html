@@ -1,0 +1,31 @@
+<mat-card class="user-info-card">
+  <div class="user-info-content">
+    <div class="loading-hint" *ngIf="(isLoading$ | async) === true">
+      Đang tải thông tin người dùng...
+    </div>
+
+    <div class="error-status" *ngIf="(errorMessage$ | async) as msg">
+      <ng-container *ngIf="msg && msg.length > 0">
+        {{ msg }}
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="(currentUser$ | async) as user">
+      <ng-container *ngIf="user !== null">
+        <div class="info-row">
+          <div class="info-label">Tên đăng nhập</div>
+          <div class="info-value">{{ user.userName }}</div>
+        </div>
+
+        <div class="info-row">
+          <div class="info-label">Roles</div>
+          <div class="info-value">
+            <ul class="role-list">
+              <li *ngFor="let role of user.roles">{{ role }}</li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</mat-card>

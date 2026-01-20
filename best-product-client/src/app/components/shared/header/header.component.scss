@@ -1,0 +1,58 @@
+.title-toolbar {
+  background: #a7d6ff;
+}
+
+.title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.menu-toolbar {
+  background: #a7d6ff;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-button {
+  background: beige;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-separator {
+  font-size: 18px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
+}
+
+.breadcrumb-link {
+  background: transparent;
+}
+
+.breadcrumb-current {
+  font-weight: 600;
+}

@@ -1,0 +1,26 @@
+/* Overlay phủ toàn màn hình trong thời gian xử lý */
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Nền mờ để thể hiện đang loading */
+  background: rgba(0, 0, 0, 0.25);
+
+  /* Canh giữa spinner */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Đảm bảo nằm trên các lớp UI khác */
+  z-index: 9999;
+}
+
+/* Container chứa spinner */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

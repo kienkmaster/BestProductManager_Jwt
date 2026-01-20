@@ -1,0 +1,49 @@
+<mat-toolbar class="title-toolbar">
+  <div class="title-container">
+    <span class="app-title">{{ appTitle }}</span>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar class="menu-toolbar">
+  <div class="menu-left">
+    <div class="breadcrumb" *ngIf="breadcrumbs && breadcrumbs.length > 0">
+      <ng-container *ngFor="let item of breadcrumbs; let i = index">
+        <mat-icon class="breadcrumb-separator" *ngIf="i > 0">chevron_right</mat-icon>
+
+        <button
+          mat-button
+          type="button"
+          class="breadcrumb-link"
+          *ngIf="item.route !== null"
+          (click)="handleBreadcrumbNavigate(item.route)"
+        >
+          {{ item.label }}
+        </button>
+
+        <span class="breadcrumb-current" *ngIf="item.route === null">
+          {{ item.label }}
+        </span>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="menu-right" *ngIf="isAuthenticated === false">
+    <button mat-button type="button" class="menu-button" (click)="handleRegisterClick()">
+      Đăng ký tài khoản
+    </button>
+
+    <button mat-button type="button" class="menu-button" (click)="handleLoginClick()">
+      Đăng nhập
+    </button>
+  </div>
+
+  <div class="menu-right" *ngIf="isAuthenticated === true">
+    <button mat-button type="button" class="menu-button" (click)="handleCurrentUserClick()">
+      {{ currentUserName }}
+    </button>
+
+    <button mat-button type="button" class="menu-button" (click)="handleLogoutClick()">
+      Đăng xuất
+    </button>
+  </div>
+</mat-toolbar>

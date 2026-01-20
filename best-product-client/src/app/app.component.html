@@ -1,0 +1,58 @@
+<app-header
+  [appTitle]="appTitle"
+  [isAuthenticated]="isAuthenticated"
+  [currentUserName]="currentUserName"
+  [breadcrumbs]="breadcrumbs"
+  (breadcrumbNavigate)="handleBreadcrumbNavigate($event)"
+  (registerClick)="handleRegisterClick()"
+  (loginClick)="handleLoginClick()"
+  (logoutClick)="handleLogoutClick()"
+  (currentUserClick)="handleCurrentUserClick()"
+></app-header>
+
+<div class="global-spinner-overlay" *ngIf="(isLoading$ | async) === true">
+  <app-spinner></app-spinner>
+</div>
+
+<main class="page-container center-container">
+  <ng-container *ngIf="isUserInfoRoute === true; else defaultPages">
+    <div class="center-container">
+      <router-outlet></router-outlet>
+    </div>
+  </ng-container>
+
+  <ng-template #defaultPages>
+    <ng-container *ngIf="currentPage === 'home'">
+      <mat-card class="home-card">
+        <h2 class="home-title">Tổng quan</h2>
+
+        <p class="home-paragraph">
+          Best Product Client là Angular SPA (Ứng dụng một trang) kết nối API BestProductManager,
+          áp dụng NgModule (Mô-đun), Reactive Forms (Form phản ứng), HttpClient (Giao tiếp HTTP),
+          RxJS (Xử lý bất đồng bộ) và NgRx (Quản lý state).
+        </p>
+
+        <ul class="home-list">
+          <li>Angular v18 + NgModule (Mô-đun)</li>
+          <li>Reactive Forms (Form phản ứng) + Custom Validators (Trình kiểm tra tùy biến)</li>
+          <li>HttpClient (Giao tiếp HTTP) + Interceptors (Bộ chặn)</li>
+          <li>NgRx v18 Store/Effects (Kho trạng thái/Hiệu ứng)</li>
+          <li>Angular Material (Giao diện Material) + SCSS (Kiểu dáng)</li>
+          <li>Environment (Môi trường) dev/prod</li>
+        </ul>
+      </mat-card>
+    </ng-container>
+
+    <ng-container *ngIf="currentPage === 'register'">
+      <div class="center-container">
+        <app-user-register (registerSuccess)="handleRegisterSuccess($event)"></app-user-register>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="currentPage === 'login'">
+      <div class="center-container">
+        <app-user-auth (loginSuccess)="handleLoginSuccess($event)"></app-user-auth>
+      </div>
+    </ng-container>
+  </ng-template>
+</main>

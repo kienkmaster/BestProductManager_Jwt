@@ -1,0 +1,87 @@
+/* Card register: giới hạn chiều rộng để canh giữa như layout business */
+.register-card {
+  width: 100%;
+  max-width: 720px;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+/* Form container */
+.register-form {
+  width: 100%;
+}
+
+/* Grid layout 2 cột: label và input */
+.register-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  row-gap: 12px;
+  column-gap: 12px;
+  align-items: start;
+}
+
+/* Khu vực title chiếm 2 cột */
+.grid-title {
+  grid-column: 1 / span 2;
+}
+
+/* Title style */
+.register-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Label style */
+.grid-label {
+  padding-top: 12px;
+}
+
+/* Input column wrapper */
+.grid-input {
+  width: 100%;
+}
+
+/* Form-field full width */
+.full-width {
+  width: 100%;
+}
+
+/* Message lỗi từng field */
+.field-error {
+  min-height: 18px;
+  font-size: 12px;
+  color: #7a1b1b;
+}
+
+/* Khu vực nút submit canh phải */
+.grid-actions {
+  grid-column: 2 / span 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Button theo yêu cầu: background beige */
+.submit-button {
+  background: beige;
+  border-radius: 6px;
+}
+
+/* Status message dưới form */
+.status {
+  margin-top: 12px;
+  min-height: 22px;
+  font-size: 13px;
+}
+
+/* Status lỗi */
+.status--error {
+  color: #7a1b1b;
+  font-weight: 600;
+}
+
+/* Status thành công */
+.status--success {
+  color: #0b5a2a;
+  font-weight: 600;
+}

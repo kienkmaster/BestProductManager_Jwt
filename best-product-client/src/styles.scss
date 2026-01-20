@@ -1,0 +1,16 @@
+/* Reset cơ bản để hiển thị nhất quán */
+html,
+body {
+  /* Chiều cao đầy đủ để layout tính toán chuẩn */
+  height: 100%;
+  /* Loại bỏ margin mặc định của trình duyệt */
+  margin: 0;
+}
+
+/* Body background theo màu chủ đạo của dự án */
+body {
+  /* Màu nền chủ đạo */
+  background: white;
+  /* Font-family mặc định cho UI business */
+  font-family: Arial, Helvetica, sans-serif;
+}
