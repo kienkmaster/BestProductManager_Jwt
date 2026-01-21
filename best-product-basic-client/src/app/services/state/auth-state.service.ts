@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AuthUserModel } from '../../models/auth-user.model';
 
 /**
@@ -65,81 +66,63 @@ export class AuthStateService {
    * Selector: trạng thái đang submit login.
    */
   public get isSubmitting$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isSubmitting));
-    });
+    return this.state$.pipe(map(state => state.isSubmitting));
   }
 
   /**
    * Selector: message status của login.
    */
   public get statusMessage$(): Observable<string> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.statusMessage));
-    });
+    return this.state$.pipe(map(state => state.statusMessage));
   }
 
   /**
    * Selector: cờ lỗi status của login.
    */
   public get isErrorStatus$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isErrorStatus));
-    });
+    return this.state$.pipe(map(state => state.isErrorStatus));
   }
 
   /**
    * Selector: trạng thái đã xác thực.
    */
   public get isAuthenticated$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isAuthenticated));
-    });
+    return this.state$.pipe(map(state => state.isAuthenticated));
   }
 
   /**
    * Selector: userName đang đăng nhập.
    */
   public get currentUserName$(): Observable<string> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.currentUserName));
-    });
+    return this.state$.pipe(map(state => state.currentUserName));
   }
 
   /**
    * Selector: cờ điều hướng về trang chủ sau login.
    */
   public get shouldNavigateHome$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.shouldNavigateHome));
-    });
+    return this.state$.pipe(map(state => state.shouldNavigateHome));
   }
 
   /**
    * Selector: trạng thái loading thông tin current user.
    */
   public get isLoadingCurrentUser$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isLoadingCurrentUser));
-    });
+    return this.state$.pipe(map(state => state.isLoadingCurrentUser));
   }
 
   /**
    * Selector: dữ liệu current user lấy từ /Account/me.
    */
   public get currentUser$(): Observable<AuthUserModel | null> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.currentUser));
-    });
+    return this.state$.pipe(map(state => state.currentUser));
   }
 
   /**
    * Selector: message lỗi khi tải current user thất bại.
    */
   public get currentUserErrorMessage$(): Observable<string> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.currentUserErrorMessage));
-    });
+    return this.state$.pipe(map(state => state.currentUserErrorMessage));
   }
 
   /**

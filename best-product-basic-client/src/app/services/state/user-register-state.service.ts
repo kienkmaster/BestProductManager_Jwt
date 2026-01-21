@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * Trạng thái đăng ký user (UserRegisterState) quản lý bằng Service.
@@ -68,45 +69,35 @@ export class UserRegisterStateService {
    * Selector: cờ submitting (spinner).
    */
   public get isSubmitting$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isSubmitting));
-    });
+    return this.state$.pipe(map(state => state.isSubmitting));
   }
 
   /**
    * Selector: status message.
    */
   public get statusMessage$(): Observable<string> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.statusMessage));
-    });
+    return this.state$.pipe(map(state => state.statusMessage));
   }
 
   /**
    * Selector: cờ lỗi của status.
    */
   public get isErrorStatus$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.isErrorStatus));
-    });
+    return this.state$.pipe(map(state => state.isErrorStatus));
   }
 
   /**
    * Selector: cờ yêu cầu reset form sau success.
    */
   public get shouldResetForm$(): Observable<boolean> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.shouldResetForm));
-    });
+    return this.state$.pipe(map(state => state.shouldResetForm));
   }
 
   /**
    * Selector: userName vừa đăng ký thành công.
    */
   public get lastRegisteredUserName$(): Observable<string | null> {
-    return new Observable(subscriber => {
-      this.state$.subscribe(state => subscriber.next(state.lastRegisteredUserName));
-    });
+    return this.state$.pipe(map(state => state.lastRegisteredUserName));
   }
 
   /**
